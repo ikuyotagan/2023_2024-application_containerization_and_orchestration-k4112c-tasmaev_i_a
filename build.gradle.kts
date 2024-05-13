@@ -56,6 +56,13 @@ buildscript {
     }
 }
 
+ktlint {
+    verbose.set(true)
+    debug.set(true)
+    ignoreFailures.set(false)
+    outputToConsole.set(true)
+}
+
 // Здесь объявляются зависимости самого приложения
 dependencies {
     // Spring Boot dependencies

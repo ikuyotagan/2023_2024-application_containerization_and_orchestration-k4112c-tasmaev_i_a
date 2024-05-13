@@ -10,16 +10,17 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class CommonConfiguration {
     @Bean
-    fun mapper(): ObjectMapper = ObjectMapper()
-        .registerModule(
-            KotlinModule.Builder()
-                .withReflectionCacheSize(512)
-                .configure(KotlinFeature.NullToEmptyCollection, false)
-                .configure(KotlinFeature.NullToEmptyMap, false)
-                .configure(KotlinFeature.NullIsSameAsDefault, false)
-                .configure(KotlinFeature.SingletonSupport, false)
-                .configure(KotlinFeature.StrictNullChecks, false)
-                .build()
-        )
-        .registerModule(JavaTimeModule())
+    fun mapper(): ObjectMapper =
+        ObjectMapper()
+            .registerModule(
+                KotlinModule.Builder()
+                    .withReflectionCacheSize(512)
+                    .configure(KotlinFeature.NullToEmptyCollection, false)
+                    .configure(KotlinFeature.NullToEmptyMap, false)
+                    .configure(KotlinFeature.NullIsSameAsDefault, false)
+                    .configure(KotlinFeature.SingletonSupport, false)
+                    .configure(KotlinFeature.StrictNullChecks, false)
+                    .build(),
+            )
+            .registerModule(JavaTimeModule())
 }
