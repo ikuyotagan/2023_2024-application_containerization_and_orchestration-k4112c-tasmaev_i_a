@@ -1,0 +1,13 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-dev.xml
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    org.springframework.web: debug

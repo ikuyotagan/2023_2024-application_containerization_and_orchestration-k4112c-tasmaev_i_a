@@ -1,0 +1,10 @@
+openapi: 3.0.0
+info:
+  title: To-Do List API
+  description: API для управления списком задач.
+  version: 1.0.0
+paths:
+  /tasks:
+    $ref: paths/tasks.yaml
+  /tasks/{taskId}:
+    $ref: paths/tasks_task.yaml

@@ -1,0 +1,17 @@
+type: object
+required:
+  - id
+  - title
+properties:
+  id:
+    type: string
+    description: Уникальный идентификатор задачи
+  title:
+    type: string
+    description: Заголовок задачи
+  description:
+    type: string
+    description: Описание задачи
+  completed:
+    type: boolean
+    description: Статус выполнения задачи

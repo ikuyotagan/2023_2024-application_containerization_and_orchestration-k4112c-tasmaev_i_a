@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: ${JDBC_URL:jdbc:postgresql://localhost:5432/db}
+    username: ${JDBC_USER}
+    password: ${JDBC_PASSWORD:}
+  liquibase:
+    user: ${LIQUIBASE_USER}
+    password: ${LIQUIBASE_PASSWORD}
