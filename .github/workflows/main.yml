@@ -29,7 +29,7 @@ jobs:
 
       # Шаг 2: Сборка Docker образа и пуш в Docker Hub
       - name: Build Docker image
-        run: docker build -t ikuyotagan/to-do-list:$GITHUB_SHA --build-context path=. docker/
+        run: docker build -t ikuyotagan/to-do-list:$GITHUB_SHA --build-context path=.. docker/
 
       - name: Log in to DockerHub
         uses: docker/login-action@v1
