@@ -29,7 +29,7 @@ jobs:
 
       # Шаг 2: Сборка Docker образа и пуш в Docker Hub
       - name: Build Docker image
-        run: docker build -t yourusername/yourrepository:$GITHUB_SHA .
+        run: docker build -t ikuyotagan/to-do-list:$GITHUB_SHA .
 
       - name: Log in to DockerHub
         uses: docker/login-action@v1
@@ -38,19 +38,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image to DockerHub
-        run: docker push yourusername/yourrepository:$GITHUB_SHA
-
-      # Шаг 3: Отправка уведомления на почту
-      - name: Send email notification
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GitHub Actions build ${{ github.run_id }} completed
-          # Дополнительные настройки для почтового клиента
-          from: Your Name <your-email@gmail.com>
-          to: recipient-email@gmail.com
-          body: Build ${{ github.run_id }} completed successfully!
-          secure: true
+        run: docker push ikuyotagan/to-do-list:$GITHUB_SHA
