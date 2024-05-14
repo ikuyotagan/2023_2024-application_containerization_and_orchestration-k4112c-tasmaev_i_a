@@ -21,7 +21,8 @@ class TasksController(
 
     override fun getTask(taskId: String): ResponseEntity<Task> {
         return ResponseEntity.ok().body(
-            tasksDao.fetchOneById(taskId.toInt())?.let { converters.convertTask(it) },
+            tasksDao.fetchOneById(taskId.toInt())?.let { converters.convertTask(it) }
+                ?: return ResponseEntity.notFound().build(),
         )
     }
 
@@ -29,7 +30,7 @@ class TasksController(
     override fun createTask(task: Task): ResponseEntity<Task> {
         tasksDao.fetchOneById(task.id.toInt())?.let { return ResponseEntity.badRequest().build() }
         tasksDao.insert(converters.convertTask(task))
-        return ResponseEntity.ok().body(task)
+        return ResponseEntity.status(201).body(task)
     }
 
     @Transactional
@@ -37,13 +38,14 @@ class TasksController(
         taskId: String,
         task: Task,
     ): ResponseEntity<Task> {
-        tasksDao.fetchOneById(task.id.toInt())?.let { return ResponseEntity.badRequest().build() }
+        tasksDao.fetchOneById(taskId.toInt()) ?: return ResponseEntity.badRequest().build()
         return ResponseEntity.ok().body(
             tasksDao.update(converters.convertTask(task.copy(id = taskId))).let { task },
         )
     }
 
     override fun deleteTask(taskId: String): ResponseEntity<Unit> {
+        tasksDao.fetchOneById(taskId.toInt()) ?: return ResponseEntity.notFound().build()
         return ResponseEntity.ok().body(
             tasksDao.deleteById(taskId.toInt()),
         )

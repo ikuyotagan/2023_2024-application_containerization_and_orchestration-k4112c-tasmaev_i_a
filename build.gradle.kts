@@ -232,3 +232,19 @@ var jarTask = tasks.jar.get()
 jarTask.dependsOn(copyOpenApiHtml)
 
 tasks.test.get().dependsOn(copyOpenApiHtml)
+
+tasks.withType<Test> {
+    group = "testing"
+    useJUnitPlatform()
+    jvmArgs("-Dspring.profiles.active=unit-test")
+}
+
+tasks.register<Test>("strongTest") {
+    group = "testing"
+    useJUnitPlatform()
+    jvmArgs("-Dspring.profiles.active=integration-test")
+}
+
+tasks.bootTestRun {
+    jvmArgs("-Dspring.profiles.active=integration-test")
+}

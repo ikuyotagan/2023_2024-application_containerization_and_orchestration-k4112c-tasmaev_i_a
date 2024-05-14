@@ -10,7 +10,7 @@ on:
       - 'hotfix/**'
 
 jobs:
-  lint:
+  lint-and-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +26,9 @@ jobs:
 
       - name: Lint Kotlin code
         run: ./gradlew ktlintCheck
+
+      - name: Test Kotlin code
+        run: ./gradlew strongTest
 
   build:
     runs-on: ubuntu-latest
