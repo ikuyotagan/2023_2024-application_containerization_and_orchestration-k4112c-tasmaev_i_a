@@ -48,3 +48,24 @@ jobs:
 
       - name: Push Docker image to DockerHub
         run: docker push ikuyotagan/to-do-list:$GITHUB_SHA
+
+  notify:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+
+    steps:
+      # Шаг 3: Отправка уведомления на почту
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: GitHub Actions build ${{ github.run_id }} completed
+          # Дополнительные настройки для почтового клиента
+          from: To-do list <igoroshatasmaev@gmail.com>
+          to: igoroshatasmaev@gmail.com
+          body: Build ${{ github.run_id }} completed successfully!
+          secure: true
