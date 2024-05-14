@@ -6,16 +6,15 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
-import ru.itmo.ict.todolist.generated.model.Task
 import ru.itmo.ict.todolist.AbstractIntegrationTest
 import ru.itmo.ict.todolist.Converters
 import ru.itmo.ict.todolist.IntegrationTest
 import ru.itmo.ict.todolist.generated.jooq.tables.daos.TasksDao
 import ru.itmo.ict.todolist.generated.jooq.tables.pojos.Tasks
+import ru.itmo.ict.todolist.generated.model.Task
 
 @IntegrationTest
-class TasksControllerTest: AbstractIntegrationTest() {
-
+class TasksControllerTest : AbstractIntegrationTest() {
     @Autowired
     private lateinit var tasksDao: TasksDao
 
@@ -38,9 +37,8 @@ class TasksControllerTest: AbstractIntegrationTest() {
         val response = tasksController.listTasks()
 
         assertEquals(HttpStatus.OK, response.statusCode)
-        assertEquals(tasks.map { converters.convertTask(it) } , response.body)
+        assertEquals(tasks.map { converters.convertTask(it) }, response.body)
     }
-
 
     @Test
     fun `listTasks returns empty list when no tasks`() {

@@ -16,14 +16,14 @@ import java.time.Clock
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [TestConfig::class]
+    classes = [TestConfig::class],
 )
 @IntegrationTest
 @EnableAutoConfiguration
 abstract class AbstractIntegrationWebTest : AbstractIntegrationTest()
 
 @SpringBootTest(
-    classes = [TestConfig::class]
+    classes = [TestConfig::class],
 )
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @IntegrationTest
@@ -32,7 +32,7 @@ abstract class AbstractIntegrationTest : MockExternalApis()
 
 @UnitTest
 @SpringBootTest(
-    classes = [TestConfig::class]
+    classes = [TestConfig::class],
 )
 @EnableAutoConfiguration(
     exclude = [
@@ -42,16 +42,19 @@ abstract class AbstractIntegrationTest : MockExternalApis()
     ],
 )
 @ComponentScan(
-    excludeFilters = [Filter(
-        type = FilterType.ASSIGNABLE_TYPE, classes = []
-    )]
+    excludeFilters = [
+        Filter(
+            type = FilterType.ASSIGNABLE_TYPE,
+            classes = [],
+        ),
+    ],
 )
 abstract class AbstractUnitSpringTest : MockExternalApis()
+
 abstract class MockExternalApis {
     @MockkBean(name = "clock")
     lateinit var clock: Clock
 }
-
 
 @Tag("integration-test")
 @EnabledIfSystemProperty(named = "spring.profiles.active", matches = "integration-test")

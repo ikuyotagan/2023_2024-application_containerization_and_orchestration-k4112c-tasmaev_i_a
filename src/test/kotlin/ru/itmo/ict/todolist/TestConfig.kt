@@ -15,9 +15,10 @@ class TestConfig {
     @ServiceConnection
     @Profile("integration-test")
     fun postgresContainer(): PostgreSQLContainer<*> {
-        return PostgreSQLContainer(DockerImageName
-            .parse("postgres:14-alpine")
-            .asCompatibleSubstituteFor("postgres"),
+        return PostgreSQLContainer(
+            DockerImageName
+                .parse("postgres:14-alpine")
+                .asCompatibleSubstituteFor("postgres"),
         )
     }
 }
